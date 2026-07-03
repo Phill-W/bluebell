@@ -3,6 +3,7 @@ package router
 import (
 	"bluebell/controller"
 	"bluebell/logger"
+	"bluebell/middlewares"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,7 +18,8 @@ func SetupRouter(mode string) *gin.Engine {
 	//r.Use(logger.GinLogger(), logger.GinRecovery(true), middlewares.RateLimitMiddleware(2*time.Second, 1))
 	r.Use(logger.GinLogger(), logger.GinRecovery(true))
 
-	r.GET("ping", func(c *gin.Context) {
+	r.GET("ping", middlewares.JWTAuthMiddleware(), func(c *gin.Context) {
+		// 如果是登录用户，判断请求头中是否有 有效的JWT ？
 		c.String(http.StatusOK, "pong")
 	})
 	r.POST("/signup", controller.SignUpHandler)
