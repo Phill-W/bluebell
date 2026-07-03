@@ -21,6 +21,8 @@ func SetupRouter(mode string) *gin.Engine {
 		c.String(http.StatusOK, "pong")
 	})
 	r.POST("/signup", controller.SignUpHandler)
+	r.POST("/login", controller.LoginHandler)
+
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"msg": "404",
