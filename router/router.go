@@ -20,10 +20,19 @@ func SetupRouter(mode string) *gin.Engine {
 
 	r.GET("ping", middlewares.JWTAuthMiddleware(), func(c *gin.Context) {
 		// 如果是登录用户，判断请求头中是否有 有效的JWT ？
-		c.String(http.StatusOK, "pong")
+		c.JSON(http.StatusOK, gin.H{
+			"msg": "ok",
+		})
 	})
-	r.POST("/signup", controller.SignUpHandler)
-	r.POST("/login", controller.LoginHandler)
+	v1 := r.Group("/api/v1")
+	// 注册
+	v1.POST("/signup", controller.SignUpHandler)
+	// 登录
+	v1.POST("/login", controller.LoginHandler)
+	v1.Use(middlewares.JWTAuthMiddleware()) // 应用JWT认证中间件
+	{
+		v1.GET("/community", controller.CommunityHandler)
+	}
 
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
