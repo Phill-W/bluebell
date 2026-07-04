@@ -1,3 +1,18 @@
+# 日志
+*.log
 web_app.log
-.workbuddy
-.log
+
+# WorkBuddy
+.workbuddy/
+
+# Go 构建产物
+*.exe
+*.exe~
+
+# air 热重载
+tmp/
+.air.toml
+.air.conf
+
+# IDE
+.idea/
