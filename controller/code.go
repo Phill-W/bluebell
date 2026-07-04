@@ -1,5 +1,6 @@
 package controller
 
+// ResCode 业务状态码类型
 type ResCode int64
 
 const (
@@ -14,6 +15,7 @@ const (
 	CodeInvalidToken
 )
 
+// codeMsgMap 状态码与提示信息的映射表
 var codeMsgMap = map[ResCode]string{
 	CodeSuccess:         "success",
 	CodeInvalidParam:    "请求参数错误",
@@ -26,6 +28,7 @@ var codeMsgMap = map[ResCode]string{
 	CodeInvalidToken: "无效的token",
 }
 
+// Msg 根据状态码返回对应的提示信息
 func (c ResCode) Msg() string {
 	msg, ok := codeMsgMap[c]
 	if !ok {

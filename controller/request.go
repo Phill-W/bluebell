@@ -6,8 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CtxUserIDKey 在gin上下文中存储当前登录用户ID的key
 const CtxUserIDKey = "UserID"
 
+// ErrorUserNotLogin 用户未登录错误
 var ErrorUserNotLogin = errors.New("用户未登录")
 
 // getCurrentUser 获得当前登录用户ID

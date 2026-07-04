@@ -8,6 +8,8 @@ import (
 )
 
 // ---- 和社区相关的内容 ----
+
+// CommunityHandler 社区列表处理函数
 func CommunityHandler(c *gin.Context) {
 	// 查询到所有的社区（community_id, community_name) 以列表的形式返回
 	data, err := logic.GetCommunityList()

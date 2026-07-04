@@ -8,8 +8,10 @@ import (
 )
 
 var (
+	// client redis客户端
 	client *redis.Client
-	Nil    = redis.Nil
+	// Nil redis未查到记录时返回的错误
+	Nil = redis.Nil
 )
 
 // Init 初始化连接
@@ -29,6 +31,7 @@ func Init(cfg *setting.RedisConfig) (err error) {
 	return nil
 }
 
+// Close 关闭redis连接
 func Close() {
 	_ = client.Close()
 }

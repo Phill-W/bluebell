@@ -9,6 +9,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+// mySecret JWT签名密钥
 var mySecret = []byte("夏天夏天悄悄过去")
 
 // MyClaims 自定义声明结构体并内嵌jwt.StandardClaims

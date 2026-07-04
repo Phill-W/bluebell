@@ -16,6 +16,7 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
+// lg 全局logger实例
 var lg *zap.Logger
 
 // Init 初始化lg
@@ -46,6 +47,7 @@ func Init(cfg *setting.LogConfig, mode string) (err error) {
 	return
 }
 
+// getEncoder 获取zap日志编码器
 func getEncoder() zapcore.Encoder {
 	encoderConfig := zap.NewProductionEncoderConfig()
 	encoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
@@ -56,6 +58,7 @@ func getEncoder() zapcore.Encoder {
 	return zapcore.NewJSONEncoder(encoderConfig)
 }
 
+// getLogWriter 获取日志写入器（基于lumberjack实现日志文件滚动切割）
 func getLogWriter(filename string, maxSize, maxBackup, maxAge int) zapcore.WriteSyncer {
 	lumberJackLogger := &lumberjack.Logger{
 		Filename:   filename,

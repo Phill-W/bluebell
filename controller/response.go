@@ -14,12 +14,14 @@ import (
 }
 */
 
+// ResponseData 统一响应数据结构
 type ResponseData struct {
 	Code ResCode     `json:"code"`
 	Msg  interface{} `json:"msg"`
 	Data interface{} `json:"data"`
 }
 
+// ResponseError 响应错误（不带额外数据）
 func ResponseError(c *gin.Context, code ResCode) {
 	c.JSON(http.StatusOK, &ResponseData{
 		Code: code,
@@ -28,6 +30,7 @@ func ResponseError(c *gin.Context, code ResCode) {
 	})
 }
 
+// ResponseSuccess 响应成功
 func ResponseSuccess(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusOK, &ResponseData{
 		Code: CodeSuccess,
@@ -36,6 +39,7 @@ func ResponseSuccess(c *gin.Context, data interface{}) {
 	})
 }
 
+// ResponseErrorWithMsg 响应错误（带自定义提示信息）
 func ResponseErrorWithMsg(c *gin.Context, code ResCode, msg interface{}) {
 	c.JSON(http.StatusOK, &ResponseData{
 		Code: code,

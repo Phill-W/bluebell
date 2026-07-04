@@ -6,8 +6,10 @@ import (
 	sf "github.com/bwmarrin/snowflake"
 )
 
+// node snowflake节点
 var node *sf.Node
 
+// Init 初始化snowflake节点
 func Init(startTime string, machineID int64) (err error) {
 	var st time.Time
 	st, err = time.Parse("2006-01-02", startTime)
@@ -18,6 +20,8 @@ func Init(startTime string, machineID int64) (err error) {
 	node, err = sf.NewNode(machineID)
 	return
 }
+
+// GenID 生成分布式唯一ID
 func GenID() int64 {
 	return node.Generate().Int64()
 }

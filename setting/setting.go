@@ -7,8 +7,10 @@ import (
 	"github.com/spf13/viper"
 )
 
+// Conf 全局配置实例
 var Conf = new(AppConfig)
 
+// AppConfig 应用配置结构体
 type AppConfig struct {
 	Name      string `mapstructure:"name"`
 	Mode      string `mapstructure:"mode"`
@@ -22,6 +24,7 @@ type AppConfig struct {
 	*RedisConfig `mapstructure:"redis"`
 }
 
+// MySQLConfig MySQL配置结构体
 type MySQLConfig struct {
 	Host         string `mapstructure:"host"`
 	User         string `mapstructure:"user"`
@@ -32,6 +35,7 @@ type MySQLConfig struct {
 	MaxIdleConns int    `mapstructure:"max_idle_conns"`
 }
 
+// RedisConfig Redis配置结构体
 type RedisConfig struct {
 	Host         string `mapstructure:"host"`
 	Password     string `mapstructure:"password"`
@@ -41,6 +45,7 @@ type RedisConfig struct {
 	MinIdleConns int    `mapstructure:"min_idle_conns"`
 }
 
+// LogConfig 日志配置结构体
 type LogConfig struct {
 	Level      string `mapstructure:"level"`
 	Filename   string `mapstructure:"filename"`
@@ -49,6 +54,7 @@ type LogConfig struct {
 	MaxBackups int    `mapstructure:"max_backups"`
 }
 
+// Init 加载配置文件并初始化全局配置
 func Init(filePath string) (err error) {
 	// 方式1：直接指定配置文件路径（相对路径或者绝对路径）
 	// 相对路径：相对执行的可执行文件的相对路径

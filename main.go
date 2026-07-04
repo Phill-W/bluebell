@@ -12,6 +12,7 @@ import (
 	"os"
 )
 
+// main 程序入口函数
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Println("need config file.eg: bluebell config.yaml")
