@@ -5,19 +5,12 @@ import (
 	"crypto/md5"
 	"database/sql"
 	"encoding/hex"
-	"errors"
 )
 
 /*
 *把每一步数据库操作封装为函数
 *待logic层根据业务需求调用
  */
-// 业务层使用的错误定义
-var (
-	ErrorUserExist       = errors.New("用户已存在")
-	ErrorUserNotExist    = errors.New("用户不存在")
-	ErrorInvalidPassword = errors.New("密码错误")
-)
 
 // secret 密码加密盐值
 const secret = "philyh.xyz"
