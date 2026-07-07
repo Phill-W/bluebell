@@ -75,7 +75,7 @@ func GetPostListHandler(c *gin.Context) {
 // GetPostListHandler2 升级版获取帖子列表的处理函数
 // 根据前端传来的参数动态获取梯子列表
 // 按照创建时间排序 或者按照分数排序
-// 1. 获取参数
+// 1. 获取请求的query string参数
 // 2. 去redis查询id列表
 // 3. 根据id去数据库查询帖子详细信息
 func GetPostListHandler2(c *gin.Context) {
