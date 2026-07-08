@@ -13,7 +13,7 @@ const (
 	KeyCommunitySetPF = "community:" // set;保存每个分区下帖子的id
 )
 
-// 给redis key加上前缀
+// 给redis key加上 前缀
 func getRedisKey(key string) string {
 	return Prefix + key
 }
