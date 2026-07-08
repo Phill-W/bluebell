@@ -10,6 +10,16 @@ import (
 )
 
 // CreatePostHandler 创建帖子的处理函数
+// @Summary 创建帖子
+// @Description 创建新帖子
+// @Tags 帖子相关接口
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
+// @Param object body models.Post true "帖子参数"
+// @Security ApiKeyAuth
+// @Success 200 {object} _Response
+// @Router /post [post]
 func CreatePostHandler(c *gin.Context) {
 	//1. 获取参数以及参数的校验
 	p := new(models.Post)
@@ -37,6 +47,16 @@ func CreatePostHandler(c *gin.Context) {
 }
 
 // GetPostDetailHandler 获取帖子详情的处理函数
+// @Summary 帖子详情
+// @Description 根据帖子id获取帖子详情
+// @Tags 帖子相关接口
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
+// @Param id path int true "帖子id"
+// @Security ApiKeyAuth
+// @Success 200 {object} _ResponsePostDetail
+// @Router /post/{id} [get]
 func GetPostDetailHandler(c *gin.Context) {
 	//1. 获取参数（从url中）
 	pidStr := c.Param("id")
@@ -59,6 +79,17 @@ func GetPostDetailHandler(c *gin.Context) {
 }
 
 // GetPostListHandler 获取帖子列表的处理函数
+// @Summary 帖子列表
+// @Description 获取帖子列表(按分页)
+// @Tags 帖子相关接口
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "Bearer JWT"
+// @Param page query int false "页码" default(1)
+// @Param size query int false "每页数量" default(10)
+// @Security ApiKeyAuth
+// @Success 200 {object} _ResponsePostList
+// @Router /posts [get]
 func GetPostListHandler(c *gin.Context) {
 	//获取分页参数
 	page, size := GetPageInfo(c)

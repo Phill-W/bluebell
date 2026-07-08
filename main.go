@@ -2,7 +2,11 @@ package main
 
 // @title bluebell
 // @version 1.0
+// @description bluebell 项目接口文档
 // @BasePath /api/v1
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 
 import (
 	"bluebell/controller"
