@@ -1,5 +1,9 @@
 package main
 
+// @title bluebell
+// @version 1.0
+// @BasePath /api/v1
+
 import (
 	"bluebell/controller"
 	"bluebell/dao/mysql"

@@ -2,9 +2,13 @@ package router
 
 import (
 	"bluebell/controller"
+	_ "bluebell/docs" // 千万不要忘了导入把你上一步生成的docs
 	"bluebell/logger"
 	"bluebell/middlewares"
 	"net/http"
+
+	files "github.com/swaggo/files"
+	gs "github.com/swaggo/gin-swagger"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,6 +21,8 @@ func SetupRouter(mode string) *gin.Engine {
 	r := gin.New()
 	//r.Use(logger.GinLogger(), logger.GinRecovery(true), middlewares.RateLimitMiddleware(2*time.Second, 1))
 	r.Use(logger.GinLogger(), logger.GinRecovery(true))
+
+	r.GET("/swagger/*any", gs.WrapHandler(files.Handler))
 
 	r.GET("ping", middlewares.JWTAuthMiddleware(), func(c *gin.Context) {
 		// 如果是登录用户，判断请求头中是否有 有效的JWT ？
