@@ -1,0 +1,27 @@
+# yaml 配置
+services:
+  mysql8019:
+    image: "mysql:8.0.19"
+    ports:
+      - "33061:3306"
+    command: "--default-authentication-plugin=mysql_native_password"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: "bluebell"
+      MYSQL_PASSWORD: "123456"
+    volumes:
+      - ./bluebell_user.sql:/docker-entrypoint-initdb.d/01-user.sql
+      - ./bluebell_community.sql:/docker-entrypoint-initdb.d/02-community.sql
+      - ./bluebell_post.sql:/docker-entrypoint-initdb.d/03-post.sql
+  redis507:
+    image: "redis:5.0.7"
+    ports:
+      - "26379:6379"
+  bluebell_app:
+    build: .
+    command: sh -c "./wait-for.sh mysql8019:3306 redis507:6379 -- ./bluebell_app ./conf/config.yaml"
+    depends_on:
+      - mysql8019
+      - redis507
+    ports:
+      - "8888:8084"
